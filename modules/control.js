@@ -1,5 +1,5 @@
 import modulStorage from './serviceStorage.js';
-const {setTableStorage, removeStorage, doneStorage} = modulStorage;
+const {setTableStorage, removeStorage, doneStorage, editStorage} = modulStorage;
 import createElem from './createElements.js';
 const {createRow} = createElem;
 
@@ -27,7 +27,7 @@ const trueControl = (formInput, btnPrimary) => {
   });
 };
 
-const formControl = (form, tbody, formInput) => {
+const formControl = (form, tbody, formInput, choice) => {
   form.addEventListener(`submit`, e => {
     e.preventDefault();
     const task = formInput.value;
@@ -38,7 +38,9 @@ const formControl = (form, tbody, formInput) => {
     const textObj = {text};
     const bg = `table-light`;
     const bgObj = {bg};
-    const obj = {...taskObj, ...doneObj, ...textObj, ...bgObj};
+    const selectChoise = choice.value;
+    const selectChoiseObj = {selectChoise};
+    const obj = {...taskObj, ...doneObj, ...textObj, ...bgObj, ...selectChoiseObj};
     setTableStorage(obj);
     tbody.append(createRow(obj));
     formInput.value = ``;
@@ -46,9 +48,13 @@ const formControl = (form, tbody, formInput) => {
 
   tbody.addEventListener(`click`, e => {
     if (e.target.closest(`.btn-danger`)) {
-      const a = e.target.closest(`.order`);
-      removeStorage(a.cells[1].textContent);
-      e.target.closest(`.order`).remove();
+      const question = confirm(`Вы действительно хотите удалить задание?`);
+      if (question === true) {
+        const a = e.target.closest(`.order`);
+        removeStorage(a.cells[1].textContent);
+        e.target.closest(`.order`).remove();
+      } else { alert(`Удаление отменяется`);}
+
     }
 
     if (e.target.closest(`.btn-success`)) {
@@ -59,6 +65,17 @@ const formControl = (form, tbody, formInput) => {
       a.cells[1].classList.add(`text-decoration-line-through`);
       a.classList.remove(`table-light`);
       a.classList.add(`table-success`);
+    }
+
+    if (e.target.closest(`.btn-edit`)) {
+      const a = e.target.closest(`.order`);
+      a.cells[1].setAttribute(`contenteditable`, true);
+      const edit = a.cells[0].textContent - 1;
+      const text = a.cells[1];
+      text.addEventListener(`input`, () => {
+         let textEdit = text.textContent;
+         editStorage(edit, textEdit);
+      });
     }
   });
 };

@@ -32,10 +32,20 @@ const doneStorage = (task) => {
   localStorage.setItem(userName, JSON.stringify(data));
 };
 
+const editStorage = (edit, text) => {
+  for (let i = data.length; i--;) {
+    if (data[i] === data[edit]) {
+      data[i].task = text;
+    }
+  }
+  localStorage.setItem(userName, JSON.stringify(data));
+};
+
 export default {
   data,
   setTableStorage,
   taskNumberStorage,
   removeStorage,
   doneStorage,
+  editStorage,
 };
