@@ -20,7 +20,7 @@ const init = () => {
 
   renderContacts(tbody, data);
   deleteControl(btnClear, formInput);
-  trueControl(formInput, btnPrimary);
+  trueControl(formInput, btnPrimary, tbody);
   formControl(form, tbody, formInput);
 };
 

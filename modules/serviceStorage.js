@@ -2,12 +2,15 @@ const userName = prompt(`Пожалуйста, авторизируйтесь`);
 
 let data = JSON.parse(localStorage.getItem(userName)) || [];
 
+const taskNumberStorage = (name) => {
+  return data.findIndex(el => el.task === name);
+};
+
 const setTableStorage = (contact) => {
   data = JSON.parse(localStorage.getItem(userName)) || [];
   data.push(contact);
   localStorage.setItem(userName, JSON.stringify(data));
 };
-
 
 const removeStorage = (name) => {
   for (let i = data.length; i--;) {
@@ -32,6 +35,7 @@ const doneStorage = (task) => {
 export default {
   data,
   setTableStorage,
+  taskNumberStorage,
   removeStorage,
   doneStorage,
 };

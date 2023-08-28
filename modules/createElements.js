@@ -1,11 +1,13 @@
-const createRow = ({task, done, text, bg}, a) => {
+import modulStorage from './serviceStorage.js';
+const {taskNumberStorage} = modulStorage;
+
+const createRow = ({task, done, text, bg}) => {
   const tr = document.createElement('tr');
   tr.classList.add(`order`);
   tr.classList.add(bg);
 
   const tdNumber = document.createElement('td');
-  tdNumber.textContent = a + 1;
-
+  tdNumber.textContent = taskNumberStorage(task) + 1;
 
   const tdTask = document.createElement('td');
   tdTask.classList.add(text);
