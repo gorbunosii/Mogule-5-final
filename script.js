@@ -1,4 +1,4 @@
-import modulControl from './modules/control.js';
+import moduleControl from './modules/control.js';
 import {renderCRM, renderContacts} from './modules/render.js';
 import modulStorage from './modules/serviceStorage.js';
 const {data} = modulStorage;
@@ -9,7 +9,7 @@ const {
   deleteControl,
   trueControl,
   formControl,
-} = modulControl;
+} = moduleControl;
 
 const init = () => {
   const {

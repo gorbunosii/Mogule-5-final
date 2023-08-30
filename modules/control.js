@@ -1,7 +1,9 @@
 import modulStorage from './serviceStorage.js';
-const {setTableStorage, removeStorage, doneStorage, editStorage} = modulStorage;
+const {data, setTableStorage, removeStorage,
+  doneStorage, editStorage} = modulStorage;
 import createElem from './createElements.js';
 const {createRow} = createElem;
+import {renderContacts} from './render.js';
 
 const deleteControl = (btnClear, formInput) => {
   btnClear.addEventListener(`click`, () => {
@@ -38,9 +40,10 @@ const formControl = (form, tbody, formInput, choice) => {
     const textObj = {text};
     const bg = `table-light`;
     const bgObj = {bg};
-    const selectChoise = choice.value;
-    const selectChoiseObj = {selectChoise};
-    const obj = {...taskObj, ...doneObj, ...textObj, ...bgObj, ...selectChoiseObj};
+    const selectChoice = choice.value;
+    const selectChoiceObj = {selectChoice};
+    const obj = {...taskObj, ...doneObj, ...textObj,
+      ...bgObj, ...selectChoiceObj};
     setTableStorage(obj);
     tbody.append(createRow(obj));
     formInput.value = ``;
@@ -53,8 +56,11 @@ const formControl = (form, tbody, formInput, choice) => {
         const a = e.target.closest(`.order`);
         removeStorage(a.cells[1].textContent);
         e.target.closest(`.order`).remove();
-      } else { alert(`Удаление отменяется`);}
-
+        tbody.rows.innerHTML = ``;
+        // renderContacts(tbody, data);
+      } else {
+        alert(`Удаление отменяется`);
+      }
     }
 
     if (e.target.closest(`.btn-success`)) {
@@ -65,6 +71,7 @@ const formControl = (form, tbody, formInput, choice) => {
       a.cells[1].classList.add(`text-decoration-line-through`);
       a.classList.remove(`table-light`);
       a.classList.add(`table-success`);
+      a.cells[1].setAttribute(`contenteditable`, false);
     }
 
     if (e.target.closest(`.btn-edit`)) {
@@ -73,8 +80,8 @@ const formControl = (form, tbody, formInput, choice) => {
       const edit = a.cells[0].textContent - 1;
       const text = a.cells[1];
       text.addEventListener(`input`, () => {
-         let textEdit = text.textContent;
-         editStorage(edit, textEdit);
+        const textEdit = text.textContent;
+        editStorage(edit, textEdit);
       });
     }
   });

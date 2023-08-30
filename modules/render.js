@@ -20,6 +20,6 @@ export const renderCRM = () => {
 };
 
 export const renderContacts = (tbody, data) => {
-  const alllRow = data.map(createRow);
-  tbody.append(...alllRow);
+  const allRow = data.map(createRow);
+  tbody.append(...allRow);
 };

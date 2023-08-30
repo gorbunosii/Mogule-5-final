@@ -1,7 +1,7 @@
-import modulStorage from './serviceStorage.js';
-const {taskNumberStorage} = modulStorage;
+import moduleStorage from './serviceStorage.js';
+const {taskNumberStorage} = moduleStorage;
 
-const createRow = ({task, done, text, bg, selectChoise}) => {
+const createRow = ({task, done, text, bg, selectChoice}) => {
   const tr = document.createElement('tr');
   tr.classList.add(`order`);
   tr.classList.add(bg);
@@ -17,7 +17,7 @@ const createRow = ({task, done, text, bg, selectChoise}) => {
   tdStatus.textContent = done;
 
   const tdChoice = document.createElement('td');
-  tdChoice.textContent = selectChoise;
+  tdChoice.textContent = selectChoice;
 
   const tdDander = document.createElement('td');
   const btnDelete = document.createElement('button');
@@ -46,9 +46,9 @@ const createSelect = (btnPrimary) => {
   const select = document.createElement('select');
   select.classList.add(`select`);
   select.classList.add(`me-3`);
-  select.options[0] = new Option('table-light', 'light', true);
-  select.options[1] = new Option('table-warning', 'warning');
-  select.options[2] = new Option('table-danger', 'danger');
+  select.options[0] = new Option('Легкая сложность задания', 'light', true);
+  select.options[1] = new Option('Средняя сложность задания', 'warning');
+  select.options[2] = new Option('Трудная сложность задания', 'danger');
   btnPrimary.before(select);
 
   return select;

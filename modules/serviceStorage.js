@@ -2,9 +2,7 @@ const userName = prompt(`Пожалуйста, авторизируйтесь`);
 
 let data = JSON.parse(localStorage.getItem(userName)) || [];
 
-const taskNumberStorage = (name) => {
-  return data.findIndex(el => el.task === name);
-};
+const taskNumberStorage = (name) => data.findIndex(el => el.task === name);
 
 const setTableStorage = (contact) => {
   data = JSON.parse(localStorage.getItem(userName)) || [];
