@@ -46,9 +46,9 @@ const createSelect = (btnPrimary) => {
   const select = document.createElement('select');
   select.classList.add(`select`);
   select.classList.add(`me-3`);
-  select.options[0] = new Option('Легкая сложность задания', 'light', true);
-  select.options[1] = new Option('Средняя сложность задания', 'warning');
-  select.options[2] = new Option('Трудная сложность задания', 'danger');
+  select.options[0] = new Option('Легкая сложность задания', 'Легко', true);
+  select.options[1] = new Option('Средняя сложность задания', 'Средне');
+  select.options[2] = new Option('Трудная сложность задания', 'Сложно');
   btnPrimary.before(select);
 
   return select;

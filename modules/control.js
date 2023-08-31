@@ -55,9 +55,10 @@ const formControl = (form, tbody, formInput, choice) => {
       if (question === true) {
         const a = e.target.closest(`.order`);
         removeStorage(a.cells[1].textContent);
-        e.target.closest(`.order`).remove();
-        tbody.rows.innerHTML = ``;
-        // renderContacts(tbody, data);
+        for (let i = tbody.rows.length; i--;) {
+          tbody.rows[i].remove();
+        }
+        renderContacts(tbody, data);
       } else {
         alert(`Удаление отменяется`);
       }
